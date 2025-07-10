@@ -1,0 +1,31 @@
+# Launch command for the app
+command: [
+  "streamlit",
+  "run",
+  "app.py"
+]
+
+# Environment variables for warehouse and telemetry
+env:
+  - name: "DATABRICKS_WAREHOUSE_ID"
+    valueFrom: "sql-warehouse"
+  - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+    value: "false"
+
+# App Metadata
+name: "DBX Retention Studio"
+description: >
+  A Databricks-powered interactive app for exploring customer churn, visualizing key metrics, and engaging with Genie through conversational analytics.
+
+# Permissions (optional — allows all workspace users to view)
+permissions:
+  - role: users
+    level: read
+
+# Optional tags for filtering or discovery
+tags:
+  - churn
+  - retention
+  - databricks
+  - dashboard
+  - genie
