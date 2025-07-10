@@ -4,14 +4,20 @@ import plotly.express as px
 from datetime import datetime
 import databricks.sql
 import os
+from dotenv import load_dotenv
+
+# -------------------------
+# Load environment variables from .env file
+# -------------------------
+load_dotenv()
 
 # -------------------------
 # Databricks SQL Connection
 # -------------------------
 connection = databricks.sql.connect(
-    server_hostname="dbc-12345.cloud.databricks.com",
-    http_path="/sql/1.0/warehouses/12345",
-    access_token="abcd"
+    server_hostname=os.getenv("DATABRICKS_HOSTNAME"),
+    http_path=os.getenv("DATABRICKS_HTTP_PATH"),
+    access_token=os.getenv("DATABRICKS_TOKEN")
 )
 
 def query_to_df(sql):
