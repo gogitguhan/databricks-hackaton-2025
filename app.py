@@ -115,15 +115,6 @@ fig_bar = px.bar(df_bar, x="channel", y="churned_users",
 st.plotly_chart(fig_bar, use_container_width=True)
 
 # -------------------------
-# 💬 Genie Launch Link
-# -------------------------
-st.subheader("💬 Ask Genie")
-st.markdown(
-    "[🪄 Launch Genie in a new tab](https://dbc-12a1b15e-49dd.cloud.databricks.com/genie/rooms/01f05d11ddb11e70b1463cc6262bd385?o=240024990044367)",
-    unsafe_allow_html=True
-)
-
-# -------------------------
 # 📁 Segment Preview
 # -------------------------
 with st.expander("📁 View Predicted Churners"):
@@ -136,6 +127,16 @@ with st.expander("📁 View Predicted Churners"):
     """
     df_segment = query_to_df(segment_query)
     st.dataframe(df_segment)
+    
+
+# -------------------------
+# 💬 Genie Launch Link
+# -------------------------
+st.subheader("💬 Ask Genie")
+st.markdown(
+    "[🪄 Launch Genie in a new tab](https://dbc-12a1b15e-49dd.cloud.databricks.com/genie/rooms/01f05d11ddb11e70b1463cc6262bd385?o=240024990044367)",
+    unsafe_allow_html=True
+)
 
 # -------------------------
 # Footer
