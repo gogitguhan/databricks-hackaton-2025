@@ -29,8 +29,8 @@
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/dbx-retention-studio.git
-cd dbx-retention-studio
+git clone https://github.com/gogitguhan/databricks-hackaton-2025.git
+cd databricks-hackaton-2025
 ```
 
 ### 2. Create `.env` File
@@ -77,12 +77,6 @@ You can access the Genie room via the app or directly here:
 ## Acknowledgements
 
 Thanks to the Databricks team for organizing the DNB Hackathon and providing an amazing opportunity to learn and build with the platform.
-
----
-
-## Contact
-
-Note: The hackathon contact email (`dnb-hackathon@databricks.com`) currently returns a bounce error stating that the group may not exist or accept external emails.
 
 ---
 
