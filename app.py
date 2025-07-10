@@ -30,15 +30,15 @@ def query_to_df(sql):
 # -------------------------
 # UI Setup
 # -------------------------
-st.set_page_config(page_title="DBX Retain Studio", layout="wide")
-st.title("📉 DBX Retain Studio")
-st.caption("Explore churn trends and engage with Genie — powered by Databricks.")
+st.set_page_config(page_title="DBX Retention Studio", layout="wide")
+st.title("📉 DBX Retention Studio")
+st.caption("App to manage customer churn trends and engage with Genie — powered by Databricks.")
 
 # -------------------------
 # Country Filter
 # -------------------------
 st.sidebar.header("🔍 Filter")
-country_filter = st.sidebar.selectbox("Select Country", ["All", "USA", "Canada", "Germany", "France", "UK"])
+country_filter = st.sidebar.selectbox("Select Country", ["All", "USA", "FR", "SPAIN"])
 
 # -------------------------
 # KPI Section
@@ -61,7 +61,7 @@ col2.metric("Predicted Churners", predicted_churners)
 col3.metric("Churn Rate", f"{churn_rate}%", delta=f"{churn_rate - 15:.1f}%")
 
 # -------------------------
-# 📈 Rebuilt Dashboard Chart (e.g., Churn by Tenure)
+# 📈 Rebuilt Dashboard Chart (Churn by Tenure)
 # -------------------------
 st.subheader("📊 Predicted Churn by Tenure")
 tenure_query = f"""
@@ -78,6 +78,41 @@ fig = px.line(df_tenure, x="tenure_months", y="user_count", markers=True,
               labels={"tenure_months": "Customer Tenure (Months)", "user_count": "Predicted Churners"},
               title="Predicted Churners by Customer Tenure")
 st.plotly_chart(fig, use_container_width=True)
+
+# -------------------------
+# 🥧 New Chart: Churn Distribution by Platform (Pie Chart)
+# -------------------------
+st.subheader("🥧 Churn Distribution by Platform")
+pie_query = f"""
+SELECT platform, COUNT(*) AS churned_users
+FROM data_pioneers.c360.churn_prediction
+WHERE churn_prediction = 1
+{f"AND country = '{country_filter}'" if country_filter != "All" else ""}
+GROUP BY platform
+"""
+df_pie = query_to_df(pie_query)
+fig_pie = px.pie(df_pie, values="churned_users", names="platform", title="Predicted Churn by Platform",
+                 color_discrete_sequence=px.colors.sequential.RdBu)
+st.plotly_chart(fig_pie, use_container_width=True)
+
+# -------------------------
+# 📊 New Chart: Churn by Channel (Bar Chart)
+# -------------------------
+st.subheader("📊 Churn Count by Acquisition Channel")
+bar_query = f"""
+SELECT canal AS channel, COUNT(*) AS churned_users
+FROM data_pioneers.c360.churn_prediction
+WHERE churn_prediction = 1
+{f"AND country = '{country_filter}'" if country_filter != "All" else ""}
+GROUP BY canal
+ORDER BY churned_users DESC
+"""
+df_bar = query_to_df(bar_query)
+fig_bar = px.bar(df_bar, x="channel", y="churned_users",
+                 labels={"channel": "Acquisition Channel", "churned_users": "Churned Users"},
+                 title="Churned Users by Acquisition Channel",
+                 color="churned_users", color_continuous_scale="Viridis")
+st.plotly_chart(fig_bar, use_container_width=True)
 
 # -------------------------
 # 💬 Genie Launch Link
