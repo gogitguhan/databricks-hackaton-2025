@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-![Dashboard Screenshot](path/to/your/screenshot.png) <!-- Replace with actual screenshot path -->
+![DBX Retention Studio Screenshot](path/to/your/screenshot.png) 
 
 ---
 
