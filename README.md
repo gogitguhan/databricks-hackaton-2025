@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-![DBX Retention Studio Screenshot](path/to/your/screenshot.png) 
+![DBX Retention Studio Screenshot](/app_screenshot.png) 
 
 ---
 
